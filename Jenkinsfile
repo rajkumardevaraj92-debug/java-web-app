@@ -22,15 +22,15 @@ pipeline {
 
         stage('Upload Artifact to S3') {
             steps {
-                sh 'aws s3 cp target/java-web-app-1.0.jar s3://my-devops-bucket/'
+                sh 'aws s3 cp target/java-web-app-1.0.jar s3://maven-jenkins-server-bucket/'
             }
         }
 
         stage('Deploy to EC2') {
             steps {
                 sh '''
-                scp target/java-web-app-1.0.jar ubuntu@EC2_IP:/home/ubuntu/
-                ssh ubuntu@EC2_IP "java -jar java-web-app-1.0.jar"
+                scp target/java-web-app-1.0.jar ec2-user@ec2-13-232-158-238:/home/ec2-user/
+                ssh ec2-user@ec2-13-232-158-238 "java -jar java-web-app-1.0.jar"
                 '''
             }
         }
