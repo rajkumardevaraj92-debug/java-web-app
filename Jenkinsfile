@@ -1,5 +1,4 @@
 pipeline {
-
     agent any
 
     tools {
@@ -20,12 +19,6 @@ pipeline {
             }
         }
 
-        stage('Upload Artifact to S3') {
-            steps {
-                sh 'aws s3 cp target/java-web-app-1.0.jar s3://maven-jenkins-server-bucket/'
-            }
-        }
-
         stage('Deploy to EC2') {
             steps {
                 sh '''
@@ -36,5 +29,4 @@ pipeline {
         }
 
     }
-
 }
