@@ -22,8 +22,8 @@ pipeline {
         stage('Deploy to EC2') {
             steps {
                 sh '''
-                scp target/java-web-app-1.0.jar ec2-user@65.2.190.151:/home/ec2-user/
-                ssh ec2-user@65.2.190.151 "java -jar java-web-app-1.0.jar"
+                scp -o StrictHostKeyChecking=no target/java-web-app-1.0.jar ec2-user@13.232.158.238:/home/ec2-user/
+                ssh -o StrictHostKeyChecking=no ec2-user@13.232.158.238 "java -jar /home/ec2-user/java-web-app-1.0.jar &"
                 '''
             }
         }
